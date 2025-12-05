@@ -135,3 +135,17 @@ export async function getStoreByDomain(shop_domain) {
     conn.release();
   }
 }
+
+// Delete store when app is uninstalled
+export async function deleteStore(shop_domain) {
+  const conn = await db.getConnection();
+
+  try {
+    await conn.query(`DELETE FROM acme_stores WHERE shop_domain = ?`, [
+      shop_domain,
+    ]);
+    return { success: true };
+  } finally {
+    conn.release();
+  }
+}
