@@ -5,7 +5,7 @@ import {
   shopifyApp,
 } from "@shopify/shopify-app-remix/server";
 import { MySQLSessionStorage } from "@shopify/shopify-app-session-storage-mysql";
-import { db } from "./utils/db.server";
+import { db, pool } from "./utils/db.server";
 
 export const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -66,16 +66,15 @@ export const shopify = shopifyApp({
         // -------------------------------------------
         // 3️⃣ Insert or Update into your acme_stores table
         // -------------------------------------------
-        const connection = await db.getConnection();
 
-        const [existing] = await connection.query(
+        const [existing] = await pool.query(
           "SELECT id FROM acme_stores WHERE shop_domain = ?",
           [shop_domain],
         );
 
         if (existing.length > 0) {
           // UPDATE record
-          await connection.query(
+          await pool.query(
             `
             UPDATE acme_stores 
             SET 
@@ -92,7 +91,7 @@ export const shopify = shopifyApp({
           console.log("🔄 Store updated in acme_stores table!");
         } else {
           // INSERT new record
-          await connection.query(
+          await pool.query(
             `
             INSERT INTO acme_stores 
               (shop_domain, access_token, store_name, email, country) 
@@ -103,8 +102,6 @@ export const shopify = shopifyApp({
 
           console.log("🆕 New store inserted into acme_stores!");
         }
-
-        connection.release();
 
         // -------------------------------------------
         // 4️⃣ Register ALL webhooks
