@@ -18,14 +18,11 @@ export const shopify = shopifyApp({
   sessionStorage: new MySQLSessionStorage(
     "mysql://apps_db4:q4w3noVm8Pqe@157.173.220.171:3306/apps_db4",
   ),
-  distribution: AppDistribution.AppStore,
+  distribution: AppDistribution.Standalone,
   future: {
     unstable_newEmbeddedAuthStrategy: true,
     removeRest: true,
   },
-  // ...(process.env.SHOP_CUSTOM_DOMAIN
-  //   ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
-  //   : {}),
 });
 
 export default shopify;
