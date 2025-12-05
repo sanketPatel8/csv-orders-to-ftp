@@ -1,18 +1,18 @@
+import { authenticate } from "../shopify.server";
 import { createOrUpdateStore } from "../models/acmeStores.server";
 
-export async function loader({ request }) {
-  // After OAuth complete
-  const shop = "demo.myshopify.com";
-  const accessToken = "xyz";
-  const storeInfo = {
+export const loader = async ({ request }) => {
+  const { session, admin, shop, accessToken } =
+    await authenticate.callback(request);
+
+  // Save ONLY basic data (no name, no email, no country)
+  await createOrUpdateStore({
     shop_domain: shop,
     access_token: accessToken,
-    store_name: "Demo Store",
-    email: "owner@test.com",
-    country: "IN",
-  };
+    store_name: "",
+    email: "",
+    country: "",
+  });
 
-  await createOrUpdateStore(storeInfo);
-
-  return new Response("Installed");
-}
+  return session.redirect("/");
+};

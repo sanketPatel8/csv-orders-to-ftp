@@ -9,6 +9,7 @@ export async function createOrUpdateStore({
   country,
 }) {
   const conn = await db.getConnection();
+  console.log("DB Connected Successfully");
 
   try {
     // Check if store already exists
@@ -47,6 +48,7 @@ export async function createOrUpdateStore({
 
 export async function updateFtpDetails(shop_domain, ftpData) {
   const conn = await db.getConnection();
+  console.log("DB Connected Successfully");
 
   try {
     await conn.query(
@@ -73,6 +75,7 @@ export async function updateFtpDetails(shop_domain, ftpData) {
 
 export async function updateCsvSettings(shop_domain, settings) {
   const conn = await db.getConnection();
+  console.log("DB Connected Successfully");
 
   try {
     await conn.query(
@@ -98,6 +101,7 @@ export async function updateCsvSettings(shop_domain, settings) {
 
 export async function updateCsvLog(shop_domain, csvName, status) {
   const conn = await db.getConnection();
+  console.log("DB Connected Successfully");
 
   try {
     await conn.query(
@@ -119,6 +123,7 @@ export async function updateCsvLog(shop_domain, csvName, status) {
 
 export async function getStoreByDomain(shop_domain) {
   const conn = await db.getConnection();
+  console.log("DB Connected Successfully");
 
   try {
     const [rows] = await conn.query(
