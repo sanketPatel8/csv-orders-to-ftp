@@ -7,7 +7,7 @@ import {
 import { MySQLSessionStorage } from "@shopify/shopify-app-session-storage-mysql"; // ⭐ UPDATED
 import { db } from "./utils/db.server";
 
-const shopify = shopifyApp({
+export const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
   apiVersion: ApiVersion.January25,

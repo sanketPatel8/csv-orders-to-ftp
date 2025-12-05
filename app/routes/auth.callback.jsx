@@ -1,8 +1,8 @@
 // app/routes/auth.callback.jsx
-import { shopify } from "~/shopify.server";
+import { shopify } from "../shopify.server";
 import { json, redirect } from "@remix-run/node";
-import { db } from "~/utils/db.server"; // your MySQL or Prisma DB
-import { registerWebhooks } from "~/utils/register-webhooks.server";
+import { db } from "../utils/db.server"; // your MySQL or Prisma DB
+import { registerWebhooks } from "../utils/register-webhooks.server";
 
 export const loader = async ({ request }) => {
   try {
