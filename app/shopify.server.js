@@ -14,7 +14,7 @@ const shopify = shopifyApp({
   scopes: process.env.SCOPES?.split(","),
   appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
-  sessionStorage: new MySQLSessionStorage(db),
+  sessionStorage: new MySQLSessionStorage(),
   distribution: AppDistribution.AppStore,
   future: {
     unstable_newEmbeddedAuthStrategy: true,

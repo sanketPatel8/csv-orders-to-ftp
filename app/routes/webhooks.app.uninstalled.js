@@ -1,5 +1,5 @@
 import { authenticate } from "../shopify.server";
-import { deleteStore } from "../models/acmeStores.server";
+// import { deleteStore } from "../models/acmeStores.server";
 
 export const action = async ({ request }) => {
   const { shop, topic } = await authenticate.webhook(request);
@@ -7,7 +7,7 @@ export const action = async ({ request }) => {
   console.log("🔥 App uninstalled from:", shop);
 
   // Remove store from MySQL
-  await deleteStore(shop);
+  // await deleteStore(shop);
 
   return new Response("Webhook processed", { status: 200 });
 };
