@@ -14,15 +14,17 @@ const shopify = shopifyApp({
   scopes: process.env.SCOPES?.split(","),
   appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
-  sessionStorage: new MySQLSessionStorage(),
+  sessionStorage: new MySQLSessionStorage(
+    "mysql://apps_db4:q4w3noVm8Pqe@157.173.220.171:3306/apps_db4",
+  ),
   distribution: AppDistribution.AppStore,
   future: {
     unstable_newEmbeddedAuthStrategy: true,
     removeRest: true,
   },
-  ...(process.env.SHOP_CUSTOM_DOMAIN
-    ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
-    : {}),
+  // ...(process.env.SHOP_CUSTOM_DOMAIN
+  //   ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
+  //   : {}),
 });
 
 export default shopify;
