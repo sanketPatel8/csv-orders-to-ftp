@@ -14,6 +14,7 @@ export const shopify = shopifyApp({
   scopes: process.env.SCOPES?.split(","),
   appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
+  auth: { path: "/auth", callbackPath: "/auth/callback" },
   sessionStorage: new MySQLSessionStorage(
     "mysql://apps_db4:q4w3noVm8Pqe@157.173.220.171:3306/apps_db4",
   ),
